@@ -321,6 +321,153 @@ const MAP_DATA = {
         hazards: ['fires', 'collapse'],
         coverDensity: 'high',
         lightLevel: 'dim'
+    },
+
+    // ============================================
+    // ADDITIONAL URBAN MAPS
+    // ============================================
+    subway_station: {
+        id: 'subway_station',
+        name: 'Subway Station',
+        environment: 'urban',
+        width: 30,
+        height: 15,
+        floors: 2,
+        spawnZones: { player: { x: 0, y: 6, w: 3, h: 3 }, enemy: { x: 25, y: 6, w: 5, h: 3 } },
+        features: ['platforms', 'train_cars', 'pillars', 'ticket_booths', 'stairs'],
+        destructibles: ['benches', 'vending_machines', 'signs'],
+        coverDensity: 'high',
+        lightLevel: 'dim'
+    },
+    parking_garage: {
+        id: 'parking_garage',
+        name: 'Parking Garage',
+        environment: 'urban',
+        width: 25,
+        height: 20,
+        floors: 4,
+        spawnZones: { player: { x: 10, y: 17, w: 5, h: 3 }, enemy: { x: 8, y: 0, w: 9, h: 5 } },
+        features: ['cars', 'ramps', 'pillars', 'toll_booths'],
+        destructibles: ['cars', 'barriers'],
+        hazards: ['explosive_cars'],
+        coverDensity: 'high',
+        lightLevel: 'dim'
+    },
+    shopping_mall: {
+        id: 'shopping_mall',
+        name: 'Shopping Mall',
+        environment: 'urban',
+        width: 35,
+        height: 30,
+        floors: 3,
+        spawnZones: { player: { x: 15, y: 27, w: 5, h: 3 }, enemy: { x: 10, y: 5, w: 15, h: 10 } },
+        features: ['stores', 'escalators', 'fountain', 'food_court', 'planters'],
+        destructibles: ['displays', 'planters', 'glass'],
+        coverDensity: 'medium',
+        lightLevel: 'bright'
+    },
+    hospital: {
+        id: 'hospital',
+        name: 'City Hospital',
+        environment: 'urban',
+        width: 30,
+        height: 25,
+        floors: 3,
+        spawnZones: { player: { x: 13, y: 22, w: 4, h: 3 }, enemy: { x: 10, y: 5, w: 10, h: 8 } },
+        features: ['patient_rooms', 'operating_theater', 'lobby', 'pharmacy', 'morgue'],
+        destructibles: ['beds', 'equipment', 'doors'],
+        coverDensity: 'medium',
+        lightLevel: 'bright'
+    },
+
+    // ============================================
+    // ADDITIONAL RURAL MAPS
+    // ============================================
+    farmland: {
+        id: 'farmland',
+        name: 'Farmland',
+        environment: 'rural',
+        width: 35,
+        height: 30,
+        floors: 2,
+        spawnZones: { player: { x: 0, y: 13, w: 3, h: 4 }, enemy: { x: 25, y: 10, w: 10, h: 10 } },
+        features: ['barn', 'silos', 'farmhouse', 'fields', 'tractors', 'fences'],
+        destructibles: ['fences', 'hay_bales', 'vehicles'],
+        hazards: ['fuel_tanks'],
+        coverDensity: 'low',
+        lightLevel: 'bright'
+    },
+    mountain_pass: {
+        id: 'mountain_pass',
+        name: 'Mountain Pass',
+        environment: 'rural',
+        width: 30,
+        height: 25,
+        floors: 3,
+        spawnZones: { player: { x: 0, y: 12, w: 3, h: 5 }, enemy: { x: 25, y: 10, w: 5, h: 8 } },
+        features: ['cliffs', 'caves', 'bridges', 'rocks', 'trees'],
+        destructibles: ['rocks', 'trees'],
+        hazards: ['cliff_falls'],
+        coverDensity: 'medium',
+        lightLevel: 'bright'
+    },
+    coastal_town: {
+        id: 'coastal_town',
+        name: 'Coastal Town',
+        environment: 'rural',
+        width: 30,
+        height: 25,
+        floors: 2,
+        spawnZones: { player: { x: 0, y: 12, w: 3, h: 5 }, enemy: { x: 20, y: 8, w: 10, h: 10 } },
+        features: ['docks', 'boats', 'lighthouse', 'fish_market', 'houses'],
+        destructibles: ['crates', 'boats', 'fences'],
+        coverDensity: 'medium',
+        lightLevel: 'bright'
+    },
+
+    // ============================================
+    // ADDITIONAL SPECIAL MAPS
+    // ============================================
+    power_plant: {
+        id: 'power_plant',
+        name: 'Power Plant',
+        environment: 'industrial',
+        width: 30,
+        height: 25,
+        floors: 3,
+        spawnZones: { player: { x: 13, y: 22, w: 4, h: 3 }, enemy: { x: 10, y: 5, w: 10, h: 8 } },
+        features: ['turbines', 'control_room', 'cooling_towers', 'transformers'],
+        destructibles: ['equipment', 'pipes'],
+        hazards: ['electricity', 'steam'],
+        coverDensity: 'medium',
+        lightLevel: 'dim'
+    },
+    train_yard: {
+        id: 'train_yard',
+        name: 'Train Yard',
+        environment: 'industrial',
+        width: 40,
+        height: 20,
+        floors: 2,
+        spawnZones: { player: { x: 0, y: 8, w: 3, h: 4 }, enemy: { x: 35, y: 8, w: 5, h: 4 } },
+        features: ['train_cars', 'locomotives', 'platforms', 'maintenance_shed', 'tower'],
+        destructibles: ['cars', 'crates'],
+        coverDensity: 'high',
+        lightLevel: 'normal'
+    },
+    chemical_plant: {
+        id: 'chemical_plant',
+        name: 'Chemical Plant',
+        environment: 'industrial',
+        width: 30,
+        height: 25,
+        floors: 2,
+        spawnZones: { player: { x: 0, y: 10, w: 3, h: 5 }, enemy: { x: 22, y: 8, w: 8, h: 9 } },
+        features: ['storage_tanks', 'pipes', 'control_building', 'loading_area'],
+        destructibles: ['pipes', 'barrels'],
+        hazards: ['toxic_gas', 'explosions'],
+        coverDensity: 'medium',
+        lightLevel: 'normal'
     }
 };
 

@@ -333,6 +333,104 @@ const ITEMS_DATA = {
         passive: true,
         hp: 2,
         description: '+2 HP (passive)'
+    },
+
+    // ============================================
+    // ADDITIONAL GRENADES
+    // ============================================
+    grenade_proximity: {
+        id: 'grenade_proximity',
+        name: 'Proximity Grenade',
+        type: 'grenade',
+        damage: { min: 4, max: 6 },
+        radius: 2,
+        range: 8,
+        uses: 1,
+        triggered: true,
+        description: 'Detonates when enemies approach.'
+    },
+    grenade_stun: {
+        id: 'grenade_stun',
+        name: 'Stun Grenade',
+        type: 'grenade',
+        radius: 3,
+        range: 10,
+        uses: 1,
+        stun: 2,
+        description: 'Stuns enemies for 2 turns.'
+    },
+
+    // ============================================
+    // ADDITIONAL GADGETS
+    // ============================================
+    holotargeter: {
+        id: 'holotargeter',
+        name: 'Holotargeter',
+        type: 'gadget',
+        uses: 3,
+        aimBonus: 15,
+        markDuration: 2,
+        description: 'Mark target for +15 aim to all allies for 2 turns.'
+    },
+    hazmat_vest: {
+        id: 'hazmat_vest',
+        name: 'Hazmat Vest',
+        type: 'gadget',
+        passive: true,
+        poisonImmune: true,
+        fireResist: 50,
+        description: 'Immunity to poison, 50% fire resistance.'
+    },
+    nanoscale_vest: {
+        id: 'nanoscale_vest',
+        name: 'Nanoscale Vest',
+        type: 'gadget',
+        passive: true,
+        hp: 2,
+        armor: 1,
+        description: '+2 HP and +1 armor.'
+    },
+    plated_vest: {
+        id: 'plated_vest',
+        name: 'Plated Vest',
+        type: 'gadget',
+        passive: true,
+        hp: 1,
+        armor: 2,
+        description: '+1 HP and +2 armor.'
+    },
+    stasis_vest: {
+        id: 'stasis_vest',
+        name: 'Stasis Vest',
+        type: 'gadget',
+        passive: true,
+        bleedImmune: true,
+        autoStabilize: true,
+        description: 'Immune to bleed, auto-stabilize when downed.'
+    },
+
+    // ============================================
+    // ADDITIONAL CONSUMABLES
+    // ============================================
+    overdrive_serum: {
+        id: 'overdrive_serum',
+        name: 'Overdrive Serum',
+        type: 'consumable',
+        uses: 1,
+        critBonus: 30,
+        damageBonus: 3,
+        duration: 1,
+        recoil: 2,
+        description: '+30% crit and +3 damage for 1 turn, take 2 damage after.'
+    },
+    regeneration_serum: {
+        id: 'regeneration_serum',
+        name: 'Regeneration Serum',
+        type: 'consumable',
+        uses: 1,
+        healPerTurn: 2,
+        duration: 5,
+        description: 'Regenerate 2 HP per turn for 5 turns.'
     }
 };
 

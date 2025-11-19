@@ -354,6 +354,208 @@ const RESEARCH_DATA = {
         description: 'Study the alien command device.',
         unlocks: ['temple_ship_assault'],
         flavor: 'The key to ending this war.'
+    },
+
+    // ============================================
+    // ADDITIONAL AUTOPSIES
+    // ============================================
+    autopsy_archon: {
+        id: 'autopsy_archon',
+        name: 'Archon Autopsy',
+        category: 'autopsy',
+        tier: 3,
+        time: 5,
+        cost: { supplies: 50 },
+        prerequisites: ['alien_biology'],
+        requires: 'archon_corpse',
+        description: 'Autopsy an Archon corpse.',
+        unlocks: ['icarus_armor'],
+        bonuses: { damage_vs_archon: 2 },
+        flavor: 'These beings were once something else, twisted by alien technology.'
+    },
+    autopsy_berserker: {
+        id: 'autopsy_berserker',
+        name: 'Berserker Autopsy',
+        category: 'autopsy',
+        tier: 3,
+        time: 5,
+        cost: { supplies: 50 },
+        prerequisites: ['autopsy_muton'],
+        requires: 'berserker_corpse',
+        description: 'Autopsy a Berserker corpse.',
+        unlocks: ['rage_strike'],
+        bonuses: { damage_vs_berserker: 2 },
+        flavor: 'Pure aggression, no self-preservation instinct whatsoever.'
+    },
+    autopsy_sectopod: {
+        id: 'autopsy_sectopod',
+        name: 'Sectopod Breakdown',
+        category: 'autopsy',
+        tier: 4,
+        time: 8,
+        cost: { supplies: 100, alienMaterials: 20 },
+        prerequisites: ['robotics'],
+        requires: 'sectopod_wreck',
+        description: 'Analyze Sectopod components.',
+        unlocks: ['heavy_mec'],
+        bonuses: { damage_vs_sectopod: 3 },
+        flavor: 'Incredibly advanced robotics. We can learn from this.'
+    },
+    autopsy_cyberdisc: {
+        id: 'autopsy_cyberdisc',
+        name: 'Cyberdisc Breakdown',
+        category: 'autopsy',
+        tier: 3,
+        time: 5,
+        cost: { supplies: 60 },
+        prerequisites: ['robotics'],
+        requires: 'cyberdisc_wreck',
+        description: 'Analyze Cyberdisc systems.',
+        unlocks: ['disc_grenades'],
+        bonuses: { damage_vs_cyberdisc: 2 },
+        flavor: 'Fascinating hover technology combined with heavy weapons.'
+    },
+
+    // ============================================
+    // TIER 2 ADDITIONS
+    // ============================================
+    tactical_sensors: {
+        id: 'tactical_sensors',
+        name: 'Tactical Sensors',
+        category: 'support',
+        tier: 2,
+        time: 4,
+        cost: { supplies: 50 },
+        description: 'Develop advanced targeting systems.',
+        unlocks: ['scope_advanced', 'holotargeter'],
+        flavor: 'Better optics mean better accuracy.'
+    },
+    combat_stims: {
+        id: 'combat_stims',
+        name: 'Combat Stimulants',
+        category: 'support',
+        tier: 2,
+        time: 5,
+        cost: { supplies: 75 },
+        prerequisites: ['advanced_medical'],
+        description: 'Develop combat enhancement drugs.',
+        unlocks: ['combat_stim', 'overdrive_serum'],
+        flavor: 'Temporary boosts can turn the tide of battle.'
+    },
+    improved_explosives: {
+        id: 'improved_explosives',
+        name: 'Improved Explosives',
+        category: 'explosives',
+        tier: 2,
+        time: 4,
+        cost: { supplies: 50 },
+        description: 'Improve explosive yield and range.',
+        unlocks: ['grenade_plus', 'rocket_plus'],
+        flavor: 'More boom for your buck.'
+    },
+
+    // ============================================
+    // TIER 3 ADDITIONS
+    // ============================================
+    gauss_weapons: {
+        id: 'gauss_weapons',
+        name: 'Gauss Weapons',
+        category: 'weapons',
+        tier: 3,
+        time: 8,
+        cost: { supplies: 125, alienMaterials: 20 },
+        prerequisites: ['magnetic_weapons'],
+        description: 'Develop advanced magnetic weaponry.',
+        unlocks: ['gauss_rifle', 'gauss_cannon'],
+        flavor: 'Hypervelocity rounds that punch through armor.'
+    },
+    advanced_ammo: {
+        id: 'advanced_ammo',
+        name: 'Advanced Ammunition',
+        category: 'weapons',
+        tier: 3,
+        time: 6,
+        cost: { supplies: 75, alienMaterials: 10 },
+        prerequisites: ['alien_materials'],
+        description: 'Develop specialized ammunition types.',
+        unlocks: ['talon_rounds', 'bluescreen_rounds', 'ap_rounds'],
+        flavor: 'The right ammo for the right target.'
+    },
+    stealth_systems: {
+        id: 'stealth_systems',
+        name: 'Stealth Systems',
+        category: 'armor',
+        tier: 3,
+        time: 8,
+        cost: { supplies: 100, alienMaterials: 20 },
+        prerequisites: ['plated_armor'],
+        description: 'Develop optical camouflage technology.',
+        unlocks: ['ghost_suit', 'phantom_protocol'],
+        flavor: 'Invisibility makes for excellent ambushes.'
+    },
+    heavy_weapons: {
+        id: 'heavy_weapons',
+        name: 'Heavy Weapons',
+        category: 'weapons',
+        tier: 3,
+        time: 7,
+        cost: { supplies: 100, alienMaterials: 15 },
+        prerequisites: ['magnetic_weapons'],
+        description: 'Develop heavy weapon platforms.',
+        unlocks: ['heavy_cannon', 'chain_gun'],
+        flavor: 'Sometimes you need more firepower.'
+    },
+
+    // ============================================
+    // TIER 4 ADDITIONS
+    // ============================================
+    psi_amp_advanced: {
+        id: 'psi_amp_advanced',
+        name: 'Advanced Psi Amp',
+        category: 'psi',
+        tier: 4,
+        time: 10,
+        cost: { supplies: 125, alienMaterials: 25, elerium: 10 },
+        prerequisites: ['psi_research'],
+        description: 'Enhance psionic amplification technology.',
+        unlocks: ['psi_amp_ii', 'psi_amp_iii'],
+        flavor: 'Greater range and power for our psionics.'
+    },
+    mec_suits: {
+        id: 'mec_suits',
+        name: 'MEC Suits',
+        category: 'armor',
+        tier: 4,
+        time: 10,
+        cost: { supplies: 150, alienMaterials: 40, elerium: 10 },
+        prerequisites: ['robotics', 'powered_armor'],
+        description: 'Develop Mechanized Exoskeletal Cybersuit.',
+        unlocks: ['mec_1', 'mec_2', 'mec_3'],
+        flavor: 'Part human, part machine, all soldier.'
+    },
+    alien_encryption: {
+        id: 'alien_encryption',
+        name: 'Alien Encryption',
+        category: 'support',
+        tier: 4,
+        time: 8,
+        cost: { supplies: 100, alienMaterials: 20 },
+        prerequisites: ['alien_weapons'],
+        description: 'Decode alien communications.',
+        unlocks: ['intel_bonus', 'early_warning'],
+        flavor: 'Knowing their plans gives us the advantage.'
+    },
+    nano_medics: {
+        id: 'nano_medics',
+        name: 'Nano Medics',
+        category: 'support',
+        tier: 4,
+        time: 7,
+        cost: { supplies: 100, alienMaterials: 15 },
+        prerequisites: ['advanced_medical', 'alien_biology'],
+        description: 'Develop nanoscale medical robots.',
+        unlocks: ['nanomedkit_ii', 'regeneration_serum'],
+        flavor: 'Microscopic doctors that heal from the inside.'
     }
 };
 

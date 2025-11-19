@@ -18,6 +18,12 @@ class GameMain {
         // Initialize input
         InputHandler.init();
 
+        // Initialize audio system
+        AudioSystem.init();
+
+        // Initialize achievement system
+        AchievementManager.init();
+
         // Load saved settings
         const settings = SaveSystem.loadSettings();
         Object.assign(Game.settings, settings);
