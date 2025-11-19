@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operation Black Dawn - Tactical Squad Combat</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen">
+            <div class="menu-header">
+                <h1>OPERATION BLACK DAWN</h1>
+                <p class="tagline">Tactical Squad Combat</p>
+            </div>
+            <div class="menu-buttons">
+                <button id="btn-new-game" class="menu-btn">NEW CAMPAIGN</button>
+                <button id="btn-continue" class="menu-btn">CONTINUE</button>
+                <button id="btn-skirmish" class="menu-btn">SKIRMISH</button>
+                <button id="btn-tutorial" class="menu-btn">TUTORIAL</button>
+                <button id="btn-options" class="menu-btn">OPTIONS</button>
+            </div>
+            <div class="version-info">v1.0.0</div>
+        </div>
+
+        <!-- Campaign Setup -->
+        <div id="campaign-setup" class="screen hidden">
+            <h2>NEW CAMPAIGN</h2>
+            <div class="setup-options">
+                <div class="option-group">
+                    <label>Commander Name:</label>
+                    <input type="text" id="commander-name" value="Commander">
+                </div>
+                <div class="option-group">
+                    <label>Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="rookie">Rookie</option>
+                        <option value="veteran" selected>Veteran</option>
+                        <option value="commander">Commander</option>
+                        <option value="legendary">Legendary</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="ironman-mode">
+                        Ironman Mode (Autosave, No Reload)
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="tutorial-enabled" checked>
+                        Enable Tutorial Tips
+                    </label>
+                </div>
+            </div>
+            <div class="setup-buttons">
+                <button id="btn-start-campaign" class="menu-btn primary">START CAMPAIGN</button>
+                <button id="btn-back-menu" class="menu-btn">BACK</button>
+            </div>
+        </div>
+
+        <!-- Strategic View (Base/World Map) -->
+        <div id="strategic-view" class="screen hidden">
+            <div id="strategic-header">
+                <div class="resource-bar">
+                    <span class="resource"><i class="icon-money"></i> $<span id="res-money">1000</span></span>
+                    <span class="resource"><i class="icon-intel"></i> <span id="res-intel">50</span> Intel</span>
+                    <span class="resource"><i class="icon-supplies"></i> <span id="res-supplies">100</span> Supplies</span>
+                    <span class="resource"><i class="icon-materials"></i> <span id="res-materials">0</span> Materials</span>
+                </div>
+                <div class="date-display">
+                    <span id="game-date">March 1, 2025</span>
+                </div>
+                <button id="btn-pause-time" class="small-btn">PAUSE</button>
+            </div>
+
+            <div id="strategic-content">
+                <!-- World Map -->
+                <div id="world-map">
+                    <canvas id="map-canvas"></canvas>
+                    <div id="mission-markers"></div>
+                </div>
+
+                <!-- Side Panel -->
+                <div id="strategic-panel">
+                    <div class="panel-tabs">
+                        <button class="tab-btn active" data-tab="missions">Missions</button>
+                        <button class="tab-btn" data-tab="base">Base</button>
+                        <button class="tab-btn" data-tab="research">Research</button>
+                        <button class="tab-btn" data-tab="soldiers">Soldiers</button>
+                        <button class="tab-btn" data-tab="armory">Armory</button>
+                    </div>
+
+                    <div id="tab-missions" class="tab-content active">
+                        <h3>Available Missions</h3>
+                        <div id="mission-list"></div>
+                    </div>
+
+                    <div id="tab-base" class="tab-content">
+                        <h3>Base Facilities</h3>
+                        <div id="facility-grid"></div>
+                    </div>
+
+                    <div id="tab-research" class="tab-content">
+                        <h3>Research Projects</h3>
+                        <div id="research-list"></div>
+                    </div>
+
+                    <div id="tab-soldiers" class="tab-content">
+                        <h3>Squad Roster</h3>
+                        <div id="soldier-list"></div>
+                    </div>
+
+                    <div id="tab-armory" class="tab-content">
+                        <h3>Equipment</h3>
+                        <div id="armory-inventory"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="threat-meter">
+                <label>Global Threat:</label>
+                <div class="meter-bar">
+                    <div id="threat-fill"></div>
+                </div>
+                <span id="threat-value">0%</span>
+            </div>
+        </div>
+
+        <!-- Squad Selection -->
+        <div id="squad-selection" class="screen hidden">
+            <h2>SELECT YOUR SQUAD</h2>
+            <div class="mission-info">
+                <h3 id="mission-title">Mission Name</h3>
+                <p id="mission-desc">Mission description</p>
+                <div class="mission-details">
+                    <span>Type: <strong id="mission-type">Elimination</strong></span>
+                    <span>Difficulty: <strong id="mission-difficulty">Moderate</strong></span>
+                    <span>Turns: <strong id="mission-turns">∞</strong></span>
+                </div>
+            </div>
+            <div class="squad-selector">
+                <div id="available-soldiers">
+                    <h4>Available Soldiers</h4>
+                    <div id="soldier-pool"></div>
+                </div>
+                <div id="selected-squad">
+                    <h4>Selected Squad (0/6)</h4>
+                    <div id="squad-slots"></div>
+                </div>
+            </div>
+            <div class="selection-buttons">
+                <button id="btn-launch-mission" class="menu-btn primary" disabled>LAUNCH MISSION</button>
+                <button id="btn-cancel-mission" class="menu-btn">CANCEL</button>
+            </div>
+        </div>
+
+        <!-- Tactical Combat View -->
+        <div id="tactical-view" class="screen hidden">
+            <canvas id="tactical-canvas"></canvas>
+
+            <!-- Combat UI Overlay -->
+            <div id="combat-ui">
+                <!-- Turn Order -->
+                <div id="turn-order">
+                    <div id="turn-portraits"></div>
+                </div>
+
+                <!-- Selected Unit Info -->
+                <div id="unit-info" class="hidden">
+                    <div class="unit-portrait"></div>
+                    <div class="unit-details">
+                        <h4 class="unit-name">Soldier Name</h4>
+                        <div class="unit-class">Class</div>
+                        <div class="stat-bars">
+                            <div class="stat-bar hp">
+                                <label>HP</label>
+                                <div class="bar"><div class="fill"></div></div>
+                                <span class="value">10/10</span>
+                            </div>
+                            <div class="stat-bar will">
+                                <label>Will</label>
+                                <div class="bar"><div class="fill"></div></div>
+                                <span class="value">50/50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div id="action-bar" class="hidden">
+                    <div class="action-points">
+                        <span>Actions: </span>
+                        <span id="ap-display">2/2</span>
+                    </div>
+                    <div class="ability-buttons">
+                        <button class="ability-btn" data-action="move" title="Move">
+                            <span class="icon">🚶</span>
+                            <span class="label">Move</span>
+                        </button>
+                        <button class="ability-btn" data-action="shoot" title="Shoot">
+                            <span class="icon">🎯</span>
+                            <span class="label">Shoot</span>
+                        </button>
+                        <button class="ability-btn" data-action="overwatch" title="Overwatch">
+                            <span class="icon">👁</span>
+                            <span class="label">Overwatch</span>
+                        </button>
+                        <button class="ability-btn" data-action="reload" title="Reload">
+                            <span class="icon">🔄</span>
+                            <span class="label">Reload</span>
+                        </button>
+                        <button class="ability-btn" data-action="hunker" title="Hunker Down">
+                            <span class="icon">🛡</span>
+                            <span class="label">Hunker</span>
+                        </button>
+                        <button class="ability-btn" data-action="grenade" title="Grenade">
+                            <span class="icon">💣</span>
+                            <span class="label">Grenade</span>
+                        </button>
+                        <button class="ability-btn" data-action="ability1" title="Class Ability">
+                            <span class="icon">⚡</span>
+                            <span class="label">Ability</span>
+                        </button>
+                        <button class="ability-btn" data-action="items" title="Use Item">
+                            <span class="icon">🎒</span>
+                            <span class="label">Items</span>
+                        </button>
+                    </div>
+                    <button id="btn-end-turn" class="end-turn-btn">END TURN</button>
+                </div>
+
+                <!-- Enemy Info (when targeting) -->
+                <div id="target-info" class="hidden">
+                    <h4 class="target-name">Enemy</h4>
+                    <div class="hit-chance">
+                        <span class="chance-value">65%</span>
+                        <span class="chance-label">Hit Chance</span>
+                    </div>
+                    <div class="damage-preview">
+                        <span>Damage: 3-5</span>
+                    </div>
+                    <div class="crit-chance">
+                        <span>Crit: 10%</span>
+                    </div>
+                </div>
+
+                <!-- Combat Log -->
+                <div id="combat-log">
+                    <div id="log-entries"></div>
+                </div>
+
+                <!-- Objectives -->
+                <div id="objectives-panel">
+                    <h4>Objectives</h4>
+                    <ul id="objective-list"></ul>
+                </div>
+            </div>
+
+            <!-- Camera Controls -->
+            <div id="camera-controls">
+                <button id="btn-rotate-left" title="Rotate Left">↺</button>
+                <button id="btn-rotate-right" title="Rotate Right">↻</button>
+                <button id="btn-zoom-in" title="Zoom In">+</button>
+                <button id="btn-zoom-out" title="Zoom Out">-</button>
+                <button id="btn-center-camera" title="Center on Unit">⌂</button>
+            </div>
+
+            <!-- Escape Menu -->
+            <div id="tactical-menu" class="hidden">
+                <h3>PAUSED</h3>
+                <button id="btn-resume">Resume</button>
+                <button id="btn-save-tactical">Save Game</button>
+                <button id="btn-options-tactical">Options</button>
+                <button id="btn-abort-mission">Abort Mission</button>
+            </div>
+        </div>
+
+        <!-- Mission Results -->
+        <div id="mission-results" class="screen hidden">
+            <h2 id="result-title">MISSION COMPLETE</h2>
+            <div class="result-summary">
+                <div class="result-stats">
+                    <div class="stat">
+                        <span class="label">Enemies Killed</span>
+                        <span id="stat-kills" class="value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Soldiers Lost</span>
+                        <span id="stat-losses" class="value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Turns Taken</span>
+                        <span id="stat-turns" class="value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Shots Fired</span>
+                        <span id="stat-shots" class="value">0</span>
+                    </div>
+                </div>
+                <div class="rewards">
+                    <h3>Rewards</h3>
+                    <div id="reward-list"></div>
+                </div>
+                <div class="promotions">
+                    <h3>Promotions</h3>
+                    <div id="promotion-list"></div>
+                </div>
+            </div>
+            <button id="btn-continue-results" class="menu-btn primary">CONTINUE</button>
+        </div>
+
+        <!-- Soldier Promotion Modal -->
+        <div id="promotion-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>PROMOTION</h2>
+                <div class="soldier-promo-info">
+                    <div class="promo-portrait"></div>
+                    <div class="promo-details">
+                        <h3 class="promo-name">Soldier Name</h3>
+                        <p class="promo-rank">Promoted to Sergeant</p>
+                    </div>
+                </div>
+                <div class="ability-choice">
+                    <h4>Choose New Ability</h4>
+                    <div id="ability-options"></div>
+                </div>
+                <button id="btn-confirm-promo" class="menu-btn primary">CONFIRM</button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen hidden">
+            <div class="loading-content">
+                <h2>Loading...</h2>
+                <div class="loading-bar">
+                    <div id="loading-progress"></div>
+                </div>
+                <p id="loading-text">Initializing...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/core/game-state.js"></script>
+    <script src="js/core/event-bus.js"></script>
+    <script src="js/core/save-system.js"></script>
+    <script src="js/core/renderer.js"></script>
+    <script src="js/core/input-handler.js"></script>
+    <script src="js/data/soldier-classes.js"></script>
+    <script src="js/data/weapons.js"></script>
+    <script src="js/data/armor.js"></script>
+    <script src="js/data/items.js"></script>
+    <script src="js/data/enemies.js"></script>
+    <script src="js/data/missions.js"></script>
+    <script src="js/data/research.js"></script>
+    <script src="js/data/facilities.js"></script>
+    <script src="js/data/maps.js"></script>
+    <script src="js/systems/combat-system.js"></script>
+    <script src="js/systems/cover-system.js"></script>
+    <script src="js/systems/los-system.js"></script>
+    <script src="js/systems/pathfinding.js"></script>
+    <script src="js/systems/ai-system.js"></script>
+    <script src="js/systems/damage-system.js"></script>
+    <script src="js/systems/morale-system.js"></script>
+    <script src="js/entities/unit.js"></script>
+    <script src="js/entities/soldier.js"></script>
+    <script src="js/entities/enemy.js"></script>
+    <script src="js/managers/mission-manager.js"></script>
+    <script src="js/managers/campaign-manager.js"></script>
+    <script src="js/managers/base-manager.js"></script>
+    <script src="js/managers/research-manager.js"></script>
+    <script src="js/managers/soldier-manager.js"></script>
+    <script src="js/ui/ui-manager.js"></script>
+    <script src="js/ui/tactical-ui.js"></script>
+    <script src="js/ui/strategic-ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
